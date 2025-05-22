@@ -9,5 +9,5 @@ package contabancaria;
  * @author bruno
  */
 public class Operacoes {
-    
+    private double valor;
 }
