@@ -6,22 +6,17 @@ package contabancaria;
 
 import cliente.Cliente;
 
-/**
- *
- * @author bruno
- */
 public class Operacoes {
 
-    public String depositar(Cliente cliente, double valor) {
-        if (valor <= 0) {
-            return "Valor inválido para depósito.";
+    public Deposito depositar(Cliente cliente, double valor) {
+        if (valor > 0) {
+            cliente.setSaldo(cliente.getSaldo() + valor);
+            Deposito deposito = new Deposito(valor);
+            // Aqui você poderia adicionar esse depósito numa lista se quisesse
+            return deposito;
+        } else {
+            System.out.println("Valor de depósito inválido.");
+            return null;
         }
-
-        double saldoAtual = cliente.getSaldo();
-        cliente.setSaldo(saldoAtual + valor);
-
-        return "Depósito de R$" + valor + " realizado com sucesso.\n"
-                + "Novo saldo: R$" + cliente.getSaldo();
     }
-
 }
