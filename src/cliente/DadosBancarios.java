@@ -9,15 +9,18 @@ package cliente;
  * @author bruno
  */
 public class DadosBancarios {
+
     private String agencia;
     private String conta;
+    private double saldo;
 
-    public DadosBancarios(String agencia, String conta) {
+    public DadosBancarios(String agencia, String conta, double saldo) {
         this.agencia = agencia;
         this.conta = conta;
+        this.saldo = saldo;
     }
 
-    public String getAgencia() {
+     public String getAgencia() {
         return agencia;
     }
 
@@ -25,7 +28,12 @@ public class DadosBancarios {
         return conta;
     }
     
-    
-    
-    
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
 }

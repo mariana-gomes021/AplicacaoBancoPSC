@@ -4,10 +4,24 @@
  */
 package contabancaria;
 
+import cliente.Cliente;
+
 /**
  *
  * @author bruno
  */
 public class Operacoes {
-    private double valor;
+
+    public String depositar(Cliente cliente, double valor) {
+        if (valor <= 0) {
+            return "Valor inválido para depósito.";
+        }
+
+        double saldoAtual = cliente.getSaldo();
+        cliente.setSaldo(saldoAtual + valor);
+
+        return "Depósito de R$" + valor + " realizado com sucesso.\n"
+                + "Novo saldo: R$" + cliente.getSaldo();
+    }
+
 }

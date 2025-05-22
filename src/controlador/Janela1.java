@@ -4,6 +4,7 @@
  */
 package controlador;
 import cliente.*;
+import contabancaria.Operacoes;
 /**
  *
  * @author bruno

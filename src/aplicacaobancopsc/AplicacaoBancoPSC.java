@@ -7,6 +7,10 @@ package aplicacaobancopsc;
 import cliente.Cliente;
 import controlador.ControladorLogin;
 import controlador.Janela1;
+import cliente.Pessoa;
+import cliente.DadosBancarios;
+import contabancaria.Operacoes;
+
 
 /**
  *
@@ -23,7 +27,19 @@ public class AplicacaoBancoPSC {
         Janela1 j1 = new Janela1();
         Janela1 j2 = new Janela1();
         
+        
         Cliente eu = new Cliente("bruno", "123","001","002");
+        
+        
+        //Realizar teste de funcionamento
+        System.out.println("Saldo antes do depósito: R$ " + eu.getSaldo());
+
+        // Realizando depósito
+        Operacoes operacoes = new Operacoes();
+        operacoes.depositar(eu, 150.0); // depósito de R$150,00
+
+        // Exibindo saldo após o depósito
+        System.out.println("Saldo após o depósito: R$ " + eu.getSaldo());
         ControladorLogin clogin = new ControladorLogin(eu);
         j1.setControle(clogin);
         j2.setControle(clogin);

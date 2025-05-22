@@ -6,40 +6,51 @@ package cliente;
 
 //composicao
 public class Cliente {
+
     private Pessoa pessoa;
     private String conta;
     private String agencia;
-    
-    public Cliente (String nome,
-                    String CPF,
-                    String conta,
-                    String agencia){
-        
-        this.pessoa = new Pessoa(nome,CPF);
-        this.conta = conta;
-        this.agencia = agencia;
+    private DadosBancarios dados;
+
+    public Cliente(String nome,
+            String CPF,
+            String conta,
+            String agencia) {
+
+        this.pessoa = new Pessoa(nome, CPF);
+        this.dados = new DadosBancarios(agencia, conta, 0.0);
+
     }
-    
-    public Cliente(Pessoa p, String c, String a){
+
+    public Cliente(Pessoa p, String c, String a, DadosBancarios dados) {
         this.pessoa = p;
         this.conta = c;
         this.agencia = a;
+        this.dados = dados;
     }
-    
-    public String getNome(){
+
+    public String getNome() {
         return this.pessoa.getNome();
     }
-    
-    public String getCPF(){
+
+    public String getCPF() {
         return this.pessoa.getCPF();
     }
-    
-    public String getAgencia(){
-        return this.agencia;
+
+    public String getAgencia() {
+        return this.dados.getAgencia();
     }
-    
-    public String getConta(){
-        return this.conta;
-    } 
+
+    public String getConta() {
+        return this.dados.getConta();
+    }
+
+    public double getSaldo() {
+        return this.dados.getSaldo();
+    }
+
+    public void setSaldo(double novoSaldo) {
+        this.dados.setSaldo(novoSaldo);
+    }
 }
 
