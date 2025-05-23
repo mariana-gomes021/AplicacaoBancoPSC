@@ -19,10 +19,14 @@ public class Deposito {
     public double getValor() {
         return valor;
     }
-
-    public String getDataFormatada() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return data.format(formatter);
+    
+     public LocalDateTime getData() {
+        return data;
     }
+
+//    public String getDataFormatada() {;
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+//        return data.format(formatter);
+//    }
 }
 

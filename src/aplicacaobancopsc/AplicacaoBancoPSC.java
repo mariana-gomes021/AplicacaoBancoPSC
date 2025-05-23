@@ -11,6 +11,10 @@ import cliente.Pessoa;
 import cliente.DadosBancarios;
 import contabancaria.Operacoes;
 import contabancaria.Deposito;
+import contabancaria.Saque;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -32,6 +36,8 @@ public class AplicacaoBancoPSC {
         /* Realizando depósito
         Operacoes operacoes = new Operacoes();
         operacoes.depositar(eu, 150.0); // depósito de R$150,00*/
+        System.out.println("---------------------------------");
+        System.out.println("Deposito");
         // Realizando depósito
         Operacoes operacoes = new Operacoes();
         Deposito meuDeposito = operacoes.depositar(eu, 150.0); // depósito de R$150,00
@@ -39,17 +45,39 @@ public class AplicacaoBancoPSC {
         // Exibindo saldo e data
         System.out.println("Saldo após o depósito: R$ " + eu.getSaldo());
         if (meuDeposito != null) {
+//            System.out.println("Depósito de R$ " + meuDeposito.getValor();
+//                    + " realizado em " + meuDeposito.getDataFormatada());
             System.out.println("Depósito de R$ " + meuDeposito.getValor()
-                    + " realizado em " + meuDeposito.getDataFormatada());
+                    + " realizado em " + getDataFormatada(meuDeposito.getData()));
         }
 
-        ControladorLogin clogin = new ControladorLogin(eu);
-        j1.setControle(clogin);
-        j2.setControle(clogin);
+        System.out.println("Saldo apos o deposito: R$ " + eu.getSaldo());
+        
+        System.out.println("---------------------------------");
+        System.out.println("Saque");
 
-        j1.setVisible(true);
-        j2.setVisible(true);
+        Cliente eu2 = new Cliente("maria", "12345", "001", "002");
 
+        Deposito meuDeposito2 = operacoes.depositar(eu2, 500);
+        Saque meuSaque = operacoes.saque(eu2, 30);
+
+        if (meuSaque != null) {
+            System.out.println("Saque de R$ " + meuSaque.getValor()
+                    + " realizado em " + getDataFormatada(meuSaque.getData()));
+            System.out.println("Saldo apos o saque: R$ " + eu2.getSaldo());
+        }
+        
+
+//        ControladorLogin clogin = new ControladorLogin(eu);
+//        j1.setControle(clogin);
+//        j2.setControle(clogin);
+//
+//        j1.setVisible(true);;
+//        j2.setVisible(true);
     }
 
+    public static String getDataFormatada(LocalDateTime data) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return data.format(formatter);
+    }
 }
