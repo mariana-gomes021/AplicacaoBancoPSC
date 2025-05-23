@@ -13,7 +13,6 @@ import contabancaria.Operacoes;
 import contabancaria.Saque;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -67,12 +66,12 @@ public class AplicacaoBancoPSC {
         }
         
 
-//        ControladorLogin clogin = new ControladorLogin(eu);
-//        j1.setControle(clogin);
-//        j2.setControle(clogin);
-//
-//        j1.setVisible(true);;
-//        j2.setVisible(true);
+        ControladorLogin clogin = new ControladorLogin(eu);;;
+        j1.setControle(clogin);
+        j2.setControle(clogin);
+
+        j1.setVisible(true);;
+        j2.setVisible(true);
     }
 
     public static String getDataFormatada(LocalDateTime data) {

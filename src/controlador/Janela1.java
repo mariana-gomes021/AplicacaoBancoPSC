@@ -15,9 +15,9 @@ import javax.swing.*;
 public class Janela1 extends javax.swing.JFrame {
 
     private ControladorLogin controla;
+
+    private JButton SaqueButton;
     private JButton DepositoButton;
-    private JLabel TextoDepositoLabel;
-    private JTextField ValorDepositoField;
 
     public void setControle(ControladorLogin c) {
         this.controla = c;
@@ -28,20 +28,19 @@ public class Janela1 extends javax.swing.JFrame {
      */
     public Janela1() {
         initComponents();
-        ValorDepositoField = new javax.swing.JTextField();
-        TextoDepositoLabel = new javax.swing.JLabel("Valor");
-        DepositoButton = new javax.swing.JButton("Depósito");
 
-        ValorDepositoField.setVisible(false);
-        TextoDepositoLabel.setVisible(false);
+        DepositoButton = new JButton("Depósito");
+        SaqueButton = new JButton("Saque");
+
         DepositoButton.setVisible(false);
-        this.getContentPane().add(ValorDepositoField);
-        this.getContentPane().add(TextoDepositoLabel);
-        this.getContentPane().add(DepositoButton);
+        SaqueButton.setVisible(false);
 
-        ValorDepositoField.setBounds(270, 200, 100, 30);
-        TextoDepositoLabel.setBounds(230, 200, 100, 30);
-        DepositoButton.setBounds(250, 250, 100, 30);
+        this.getContentPane().add(DepositoButton);
+        this.getContentPane().add(SaqueButton);
+
+        DepositoButton.setBounds(250, 185, 150, 30);
+        SaqueButton.setBounds(250, 225, 150, 30);
+
         this.setLayout(null);
     }
 
@@ -160,48 +159,41 @@ public class Janela1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+
         Cliente user = new Cliente(NomeLabel.getText(),
                 CpfLabel.getText(),
                 AgenciaLabel.getText(),
                 ContaLabel.getText());
 
         this.controla.setCliente(user);
-
-        Operacoes operacoes = new Operacoes();
-
-        DepositoButton.addActionListener(e -> {
-            try {
-                double valorDeposito = Double.parseDouble(ValorDepositoField.getText());
-                Deposito deposito = operacoes.depositar(this.controla.getCliente(), valorDeposito);
-
-                if (deposito != null) {
-                    JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso: R$ " + deposito.getValor());
-                } else {
-                    JOptionPane.showMessageDialog(null, "Falha ao realizar depósito.");
-                }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Valor inválido! Digite um número.");
-            } finally {
-                ValorDepositoField.setVisible(false);
-                TextoDepositoLabel.setVisible(false);
-                DepositoButton.setVisible(false);
-            }
-        });
-
-        ValorDepositoField.setVisible(true);
-        TextoDepositoLabel.setVisible(true);
+        
         DepositoButton.setVisible(true);
-        this.revalidate();
-        this.repaint();
+        SaqueButton.setVisible(true);
+        
+        if (DepositoButton.getActionListeners().length == 0) {
+            DepositoButton.addActionListener(e -> {
+                DepositoDialog depositoDialog = new DepositoDialog(this, controla);
+                depositoDialog.setVisible(true);
+            });
+        }
+
+        if (SaqueButton.getActionListeners().length == 0) {
+            SaqueButton.addActionListener(e -> {
+                SaqueDialog saqueDialog = new SaqueDialog(this, controla);
+                saqueDialog.setVisible(true);
+            });
+        }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
         NomeLabel.setText(controla.getCliente().getNome());
         CpfLabel.setText(controla.getCliente().getCPF());
         AgenciaLabel.setText(controla.getCliente().getAgencia());
         ContaLabel.setText(controla.getCliente().getConta());
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

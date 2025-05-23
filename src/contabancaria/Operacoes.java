@@ -24,9 +24,10 @@ public class Operacoes {
                     double saldoMenosValor = (cliente.getSaldo() - valor);
                     cliente.setSaldo(saldoMenosValor);
                     System.out.println("Saque feito com sucesso!");
+                    System.out.println("Saldo apos saque: " + cliente.getSaldo());
                     return saque;
                 } else {
-                    System.out.println("Saldo insuficiente para saque! Seu saldo: " + cliente.getSaldo());
+                    System.out.println("Saldo insuficiente para saque! Seu saldo: R$" + cliente.getSaldo());
                     return null;
                 }
             } else {
