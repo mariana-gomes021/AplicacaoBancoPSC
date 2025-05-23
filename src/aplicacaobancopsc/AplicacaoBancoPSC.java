@@ -10,7 +10,6 @@ import controlador.Janela1;
 import cliente.Pessoa;
 import cliente.DadosBancarios;
 import contabancaria.Operacoes;
-import contabancaria.Deposito;
 import contabancaria.Saque;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,16 +39,16 @@ public class AplicacaoBancoPSC {
         System.out.println("Deposito");
         // Realizando depósito
         Operacoes operacoes = new Operacoes();
-        Deposito meuDeposito = operacoes.depositar(eu, 150.0); // depósito de R$150,00
+        //Deposito meuDeposito = operacoes.depositar(eu, 150.0); // depósito de R$150,00
 
         // Exibindo saldo e data
         System.out.println("Saldo após o depósito: R$ " + eu.getSaldo());
-        if (meuDeposito != null) {
-//            System.out.println("Depósito de R$ " + meuDeposito.getValor();
-//                    + " realizado em " + meuDeposito.getDataFormatada());
-            System.out.println("Depósito de R$ " + meuDeposito.getValor()
-                    + " realizado em " + getDataFormatada(meuDeposito.getData()));
-        }
+//        if (meuDeposito != null) {
+////            System.out.println("Depósito de R$ " + meuDeposito.getValor();
+////                    + " realizado em " + meuDeposito.getDataFormatada());
+//            System.out.println("Depósito de R$ " + meuDeposito.getValor()
+//                    + " realizado em " + getDataFormatada(meuDeposito.getData()));
+//        };
 
         System.out.println("Saldo apos o deposito: R$ " + eu.getSaldo());
         
@@ -58,7 +57,7 @@ public class AplicacaoBancoPSC {
 
         Cliente eu2 = new Cliente("maria", "12345", "001", "002");
 
-        Deposito meuDeposito2 = operacoes.depositar(eu2, 500);
+        //Deposito meuDeposito2 = operacoes.depositar(eu2, 500);
         Saque meuSaque = operacoes.saque(eu2, 30);
 
         if (meuSaque != null) {
