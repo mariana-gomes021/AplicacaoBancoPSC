@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package controlador;
+
 import cliente.*;
-import contabancaria.Operacoes;
+import contabancaria.*;
+import javax.swing.*;
+
 /**
  *
  * @author bruno
@@ -12,16 +15,34 @@ import contabancaria.Operacoes;
 public class Janela1 extends javax.swing.JFrame {
 
     private ControladorLogin controla;
-    public void setControle(ControladorLogin c){
+    private JButton DepositoButton;
+    private JLabel TextoDepositoLabel;
+    private JTextField ValorDepositoField;
+
+    public void setControle(ControladorLogin c) {
         this.controla = c;
     }
-    
-    
+
     /**
      * Creates new form Janela1
      */
     public Janela1() {
         initComponents();
+        ValorDepositoField = new javax.swing.JTextField();
+        TextoDepositoLabel = new javax.swing.JLabel("Valor");
+        DepositoButton = new javax.swing.JButton("Depósito");
+
+        ValorDepositoField.setVisible(false);
+        TextoDepositoLabel.setVisible(false);
+        DepositoButton.setVisible(false);
+        this.getContentPane().add(ValorDepositoField);
+        this.getContentPane().add(TextoDepositoLabel);
+        this.getContentPane().add(DepositoButton);
+
+        ValorDepositoField.setBounds(270, 200, 100, 30);
+        TextoDepositoLabel.setBounds(230, 200, 100, 30);
+        DepositoButton.setBounds(250, 250, 100, 30);
+        this.setLayout(null);
     }
 
     /**
@@ -33,16 +54,17 @@ public class Janela1 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        NomeLabel = new javax.swing.JTextField();
+        CpfLabel = new javax.swing.JTextField();
+        AgenciaLabel = new javax.swing.JTextField();
+        ContaLabel = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,9 +72,9 @@ public class Janela1 extends javax.swing.JFrame {
 
         jLabel2.setText("CPF");
 
-        jLabel3.setText("agencia");
+        jLabel3.setText("Agência");
 
-        jLabel4.setText("conta");
+        jLabel4.setText("Conta");
         jLabel4.setToolTipText("");
 
         jButton1.setText("OK");
@@ -62,68 +84,75 @@ public class Janela1 extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("ler");
+        jButton2.setText("Ler");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Cadastrar conta");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(17, 17, 17)
-                        .addComponent(jTextField4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(24, 24, 24)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(210, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(67, 67, 67))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(17, 17, 17)
+                                    .addComponent(ContaLabel))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(NomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(24, 24, 24)
+                                    .addComponent(CpfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(AgenciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton1))
+                        .addContainerGap(195, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CpfLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AgenciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ContaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(44, 44, 44)
-                .addComponent(jButton1)
                 .addGap(30, 30, 30)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -131,21 +160,49 @@ public class Janela1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Cliente user = new Cliente(jTextField1.getText(),
-                                jTextField2.getText(), 
-                                jTextField3.getText(),
-                                jTextField4.getText());
-        
+        Cliente user = new Cliente(NomeLabel.getText(),
+                CpfLabel.getText(),
+                AgenciaLabel.getText(),
+                ContaLabel.getText());
+
         this.controla.setCliente(user);
+
+        Operacoes operacoes = new Operacoes();
+
+        DepositoButton.addActionListener(e -> {
+            try {
+                double valorDeposito = Double.parseDouble(ValorDepositoField.getText());
+                Deposito deposito = operacoes.depositar(this.controla.getCliente(), valorDeposito);
+
+                if (deposito != null) {
+                    JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso: R$ " + deposito.getValor());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Falha ao realizar depósito.");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Valor inválido! Digite um número.");
+            } finally {
+                ValorDepositoField.setVisible(false);
+                TextoDepositoLabel.setVisible(false);
+                DepositoButton.setVisible(false);
+            }
+        });
+
+        ValorDepositoField.setVisible(true);
+        TextoDepositoLabel.setVisible(true);
+        DepositoButton.setVisible(true);
+        this.revalidate();
+        this.repaint();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        jTextField1.setText(controla.getCliente().getNome());
-        jTextField2.setText(controla.getCliente().getCPF());
-        jTextField3.setText(controla.getCliente().getAgencia());
-        jTextField4.setText(controla.getCliente().getConta());
-        
+        NomeLabel.setText(controla.getCliente().getNome());
+        CpfLabel.setText(controla.getCliente().getCPF());
+        AgenciaLabel.setText(controla.getCliente().getAgencia());
+        ContaLabel.setText(controla.getCliente().getConta());
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -184,15 +241,16 @@ public class Janela1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AgenciaLabel;
+    private javax.swing.JTextField ContaLabel;
+    private javax.swing.JTextField CpfLabel;
+    private javax.swing.JTextField NomeLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

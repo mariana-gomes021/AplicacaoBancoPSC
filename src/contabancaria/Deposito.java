@@ -24,5 +24,6 @@ public class Deposito {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return data.format(formatter);
     }
+    
 }
 
