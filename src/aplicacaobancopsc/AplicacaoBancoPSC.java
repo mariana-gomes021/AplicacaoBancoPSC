@@ -65,7 +65,7 @@ public class AplicacaoBancoPSC {
             System.out.println("Saldo apos o saque: R$ " + eu2.getSaldo());
         }
         
-
+//
         ControladorLogin clogin = new ControladorLogin(eu);;;
         j1.setControle(clogin);
         j2.setControle(clogin);

@@ -13,7 +13,7 @@ public class DadosBancarios {
     private String agencia;
     private String conta;
     private double saldo;
-
+   
     public DadosBancarios(String agencia, String conta, double saldo) {
         this.agencia = agencia;
         this.conta = conta;
@@ -35,5 +35,5 @@ public class DadosBancarios {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
-
+    
 }

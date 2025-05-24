@@ -11,6 +11,7 @@ public class Cliente {
     private String conta;
     private String agencia;
     private DadosBancarios dados;
+    private double limite = 500;
 
     public Cliente(String nome,
             String CPF,
@@ -27,8 +28,9 @@ public class Cliente {
         this.conta = c;
         this.agencia = a;
         this.dados = dados;
+        
     }
-
+    
     public String getNome() {
         return this.pessoa.getNome();
     }
@@ -52,5 +54,14 @@ public class Cliente {
     public void setSaldo(double novoSaldo) {
         this.dados.setSaldo(novoSaldo);
     }
+    
+   public double getLimite() {
+        return this.limite;
+    }
+
+    public void setLimite(double limite) {
+        this.limite = limite;
+    }
 }
+
 
