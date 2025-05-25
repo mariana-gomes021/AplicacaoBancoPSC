@@ -1,6 +1,9 @@
 package com.mycompany.primerioprograma;
 import java.util.Scanner;
-
+/**
+ *
+ * @author guga0
+ */
 public class BancoDados1 {
 
     public static void main(String[] args) {
@@ -24,10 +27,10 @@ public class BancoDados1 {
                     System.out.printf("Saldo atual: R$ %.2f\n", conta.getSaldo());
                     break;
                 case 2:
-                    System.out.printf("Limite disponível: R$ %.2f\n", conta.getLimite());
+                    System.out.printf("Limite disponivel: R$ %.2f\n", conta.getLimite());
                     break;
                 case 3:
-                    System.out.printf("Total disponível (saldo + limite): R$ %.2f\n", conta.getSaldoTotalDisponivel());
+                    System.out.printf("Total disponivel (saldo + limite): R$ %.2f\n", conta.getSaldoTotalDisponivel());
                     break;
                 case 4:
                     System.out.print("Valor do saque: R$ ");
@@ -45,6 +48,51 @@ public class BancoDados1 {
                 default:
                     System.out.println("Opção inválida.");
             }
+        }
+    }
+}
+
+class ContaBancaria {
+    private String titular;
+    private double saldo;
+    private double limite;
+
+    public ContaBancaria(String titular, double saldo, double limite) {
+        this.titular = titular;
+        this.saldo = saldo;
+        this.limite = limite;
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public double getLimite() {
+        return limite;
+    }
+
+    public double getSaldoTotalDisponivel() {
+        return saldo + limite;
+    }
+
+    public boolean sacar(double valor) {
+        double saldoTotal = saldo + limite;
+
+        if (valor <= saldoTotal) {
+            if (valor <= saldo) {
+                saldo -= valor;
+            } else {
+                double valorRestante = valor - saldo;
+                saldo = 0;
+                limite -= valorRestante;
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 }
