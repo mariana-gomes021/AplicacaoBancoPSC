@@ -18,6 +18,7 @@ public class Janela1 extends javax.swing.JFrame {
 
     private JButton SaqueButton;
     private JButton DepositoButton;
+    private JButton ExtratoButton;
 
     public void setControle(ControladorLogin c) {
         this.controla = c;
@@ -31,15 +32,19 @@ public class Janela1 extends javax.swing.JFrame {
 
         DepositoButton = new JButton("Depósito");
         SaqueButton = new JButton("Saque");
+        ExtratoButton = new JButton("Extrato");
 
         DepositoButton.setVisible(false);
         SaqueButton.setVisible(false);
+        ExtratoButton.setVisible(false);
 
         this.getContentPane().add(DepositoButton);
         this.getContentPane().add(SaqueButton);
+        this.getContentPane().add(ExtratoButton);
 
         DepositoButton.setBounds(250, 185, 150, 30);
         SaqueButton.setBounds(250, 225, 150, 30);
+        ExtratoButton.setBounds(250, 265, 150, 30);
 
         this.setLayout(null);
     }
@@ -166,10 +171,11 @@ public class Janela1 extends javax.swing.JFrame {
                 ContaLabel.getText());
 
         this.controla.setCliente(user);
-        
+
         DepositoButton.setVisible(true);
         SaqueButton.setVisible(true);
-        
+        ExtratoButton.setVisible(true);
+
         if (DepositoButton.getActionListeners().length == 0) {
             DepositoButton.addActionListener(e -> {
                 DepositoDialog depositoDialog = new DepositoDialog(this, controla);
@@ -181,6 +187,26 @@ public class Janela1 extends javax.swing.JFrame {
             SaqueButton.addActionListener(e -> {
                 SaqueDialog saqueDialog = new SaqueDialog(this, controla);
                 saqueDialog.setVisible(true);
+            });
+        }
+
+        if (ExtratoButton.getActionListeners().length == 0) {
+            ExtratoButton.addActionListener(e -> {
+                StringBuilder extratoTexto = new StringBuilder();
+                Extrato extrato = user.getExtrato();
+
+                if (extrato == null || extrato.getTransacoes().isEmpty()) {
+                    extratoTexto.append("Nenhuma transação registrada.");
+                } else {
+                    for (Transacao t : extrato.getTransacoes()) {
+                        extratoTexto.append(t.toString()).append("\n");
+                    }
+                }
+
+                JOptionPane.showMessageDialog(this,
+                        extratoTexto.toString(),
+                        "Extrato Bancário",
+                        JOptionPane.INFORMATION_MESSAGE);
             });
         }
 

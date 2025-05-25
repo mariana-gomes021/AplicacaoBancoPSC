@@ -7,74 +7,64 @@ package aplicacaobancopsc;
 import cliente.Cliente;
 import controlador.ControladorLogin;
 import controlador.Janela1;
-import cliente.Pessoa;
-import cliente.DadosBancarios;
-import contabancaria.Operacoes;
+import contabancaria.Deposito;
 import contabancaria.Saque;
+import contabancaria.Operacoes;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- *
- * @author bruno
- */
 public class AplicacaoBancoPSC {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
 
+        // Criando janelas e clientes
         Janela1 j1 = new Janela1();
         Janela1 j2 = new Janela1();
 
-        Cliente eu = new Cliente("bruno", "123", "001", "002");
+        Cliente bruno = new Cliente("Bruno", "123", "001", "002");
+        Cliente maria = new Cliente("Maria", "456", "001", "003");
 
-        /* Realizando depósito
+        //limite
+        bruno.setLimite(1000.0);
+        maria.setLimite(750.0);
+
+        // Operações bancárias
         Operacoes operacoes = new Operacoes();
-        operacoes.depositar(eu, 150.0); // depósito de R$150,00*/
-        System.out.println("---------------------------------");
-        System.out.println("Deposito");
-        // Realizando depósito
-        Operacoes operacoes = new Operacoes();
-        //Deposito meuDeposito = operacoes.depositar(eu, 150.0); // depósito de R$150,00
 
-        // Exibindo saldo e data
-        System.out.println("Saldo após o depósito: R$ " + eu.getSaldo());
-//        if (meuDeposito != null) {
-////            System.out.println("Depósito de R$ " + meuDeposito.getValor();
-////                    + " realizado em " + meuDeposito.getDataFormatada());
-//            System.out.println("Depósito de R$ " + meuDeposito.getValor()
-//                    + " realizado em " + getDataFormatada(meuDeposito.getData()));
-//        };
+        System.out.println("--------------- DEPOSITO ---------------");
+        Deposito depositoBruno = operacoes.depositar(bruno, 500.0);
 
-        System.out.println("Saldo apos o deposito: R$ " + eu.getSaldo());
-        
-        System.out.println("---------------------------------");
-        System.out.println("Saque");
-
-        Cliente eu2 = new Cliente("maria", "12345", "001", "002");
-
-        //Deposito meuDeposito2 = operacoes.depositar(eu2, 500);
-        Saque meuSaque = operacoes.saque(eu2, 30);
-
-        if (meuSaque != null) {
-            System.out.println("Saque de R$ " + meuSaque.getValor()
-                    + " realizado em " + getDataFormatada(meuSaque.getData()));
-            System.out.println("Saldo apos o saque: R$ " + eu2.getSaldo());
+        if (depositoBruno != null) {
+            System.out.println("Deposito de R$ " + depositoBruno.getValor()
+                    + " realizado em " + formatarData(depositoBruno.getData()));
+            System.out.println("Saldo atual de Bruno: R$ " + bruno.getSaldo());
         }
-        
-//
-        ControladorLogin clogin = new ControladorLogin(eu);;;
+
+        System.out.println("\n--------------- SAQUE ---------------");
+        Saque saqueMaria = operacoes.sacar(maria, 150.0);
+
+        if (saqueMaria != null) {
+            System.out.println("Saque de R$ " + saqueMaria.getValor()
+                    + " realizado em " + formatarData(saqueMaria.getData()));
+            System.out.println("Saldo atual de Maria: R$ " + maria.getSaldo());
+        }
+
+        System.out.println("\n--------------- EXTRATO DE BRUNO ---------------");
+        bruno.imprimirExtrato();
+
+        System.out.println("\n--------------- EXTRATO DE MARIA ---------------");
+        maria.imprimirExtrato();
+
+        // Controle de login
+        ControladorLogin clogin = new ControladorLogin(bruno);
         j1.setControle(clogin);
         j2.setControle(clogin);
 
-        j1.setVisible(true);;
+        j1.setVisible(true);
         j2.setVisible(true);
     }
 
-    public static String getDataFormatada(LocalDateTime data) {
+    public static String formatarData(LocalDateTime data) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return data.format(formatter);
     }

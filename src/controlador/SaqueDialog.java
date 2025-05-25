@@ -30,7 +30,7 @@ public class SaqueDialog extends JDialog{
                 try {
                     double valorDeposito = Double.parseDouble(valorSaqueField.getText());
                     Operacoes operacoes = new Operacoes();
-                    Saque saque = operacoes.saque(this.controla.getCliente(), valorDeposito);
+                    Saque saque = operacoes.sacar(this.controla.getCliente(), valorDeposito);
 
                     if (saque != null) {
                         JOptionPane.showMessageDialog(null, "Saque realizado com sucesso: R$ " + saque.getValor());

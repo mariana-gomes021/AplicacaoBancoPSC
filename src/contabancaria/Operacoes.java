@@ -4,35 +4,37 @@ import cliente.Cliente;
 
 public class Operacoes {
 
-    public Deposito depositar(Cliente cliente, double valor) {
-        if (valor > 0) {
-            cliente.setSaldo(cliente.getSaldo() + valor);
-            Deposito deposito = new Deposito(valor);
-            // Aqui você poderia adicionar esse depósito numa lista se quisesse
-            return deposito;
+    public Saque sacar(Cliente cliente, double valor) {
+        double saldoAtual = cliente.getSaldo();
+
+        if (valor <= saldoAtual + cliente.getLimite()) {
+            cliente.setSaldo(saldoAtual - valor);
+
+            Saque novoSaque = new Saque(valor);
+
+            // Adiciona transação com info do saldo e limite
+            String descricao = String.format("Saque de R$ %.2f | Saldo: R$ %.2f | Limite: R$ %.2f",
+                    valor, cliente.getSaldo(), cliente.getLimite());
+            cliente.adicionarTransacao(descricao, valor);
+
+            return novoSaque;
         } else {
-            System.out.println("Valor de deposito inválido.");
+            System.out.println("Saldo insuficiente para saque.");
             return null;
         }
     }
 
-    public Saque saque(Cliente cliente, double valor) {
-    if (valor <= 0) {
-        System.out.println("Valor de saque inválido.");
-        return null;
-    }
+    public Deposito depositar(Cliente cliente, double valor) {
+        double saldoAtual = cliente.getSaldo();
+        cliente.setSaldo(saldoAtual + valor);
 
-    double saldoDisponivel = cliente.getSaldo() + cliente.getLimite();
+        Deposito novoDeposito = new Deposito(valor);
 
-    if (valor <= saldoDisponivel) {
-        Saque saque = new Saque(valor);
-        cliente.setSaldo(cliente.getSaldo() - valor); // saldo pode ficar negativo
-        System.out.println("Saque feito com sucesso!");
-        System.out.println("Saldo após saque: " + cliente.getSaldo());
-        return saque;
-    } else {
-        System.out.println("Saldo + limite insuficientes para saque! Saldo disponível: R$" + saldoDisponivel);
-        return null;
+        // Adiciona transação com info do saldo e limite
+        String descricao = String.format("Deposito de R$ %.2f | Saldo: R$ %.2f | Limite: R$ %.2f",
+                valor, cliente.getSaldo(), cliente.getLimite());
+        cliente.adicionarTransacao(descricao, valor);
+
+        return novoDeposito;
     }
-}
 }

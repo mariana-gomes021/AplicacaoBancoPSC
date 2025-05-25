@@ -4,7 +4,8 @@
  */
 package cliente;
 
-//composicao
+import contabancaria.Extrato;
+
 public class Cliente {
 
     private Pessoa pessoa;
@@ -12,6 +13,7 @@ public class Cliente {
     private String agencia;
     private DadosBancarios dados;
     private double limite = 500;
+    private Extrato extrato; // 🌟 Adicionando extrato
 
     public Cliente(String nome,
             String CPF,
@@ -20,7 +22,7 @@ public class Cliente {
 
         this.pessoa = new Pessoa(nome, CPF);
         this.dados = new DadosBancarios(agencia, conta, 0.0);
-
+        this.extrato = new Extrato(); // Instanciando extrato
     }
 
     public Cliente(Pessoa p, String c, String a, DadosBancarios dados) {
@@ -28,9 +30,9 @@ public class Cliente {
         this.conta = c;
         this.agencia = a;
         this.dados = dados;
-        
+        this.extrato = new Extrato();
     }
-    
+
     public String getNome() {
         return this.pessoa.getNome();
     }
@@ -54,14 +56,28 @@ public class Cliente {
     public void setSaldo(double novoSaldo) {
         this.dados.setSaldo(novoSaldo);
     }
-    
-   public double getLimite() {
+
+    public double getLimite() {
         return this.limite;
     }
 
     public void setLimite(double limite) {
         this.limite = limite;
     }
-}
+    
 
+    // Métodos do extrato:
+    public void adicionarTransacao(String tipo, double valor) {
+        extrato.adicionarTransacao(tipo, valor);
+    }
+
+    public void imprimirExtrato() {
+        extrato.imprimirExtrato();
+    }
+    
+    public Extrato getExtrato(){
+        return this.extrato;
+    }
+    
+}
 

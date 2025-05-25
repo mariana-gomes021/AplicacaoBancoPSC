@@ -7,22 +7,23 @@ package contabancaria;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deposito {
-
+public class Transacao {
+    private String tipo;
     private double valor;
     private LocalDateTime data;
 
-    public Deposito(double valor) {
+    public Transacao(String tipo, double valor) {
+        this.tipo = tipo;
         this.valor = valor;
         this.data = LocalDateTime.now();
     }
 
-    public double getValor() {
-        return valor;
+    public String getTipo() {
+        return tipo;
     }
 
-    public LocalDateTime getData() {
-        return data;
+    public double getValor() {
+        return valor;
     }
 
     public String getDataFormatada() {
@@ -30,4 +31,9 @@ public class Deposito {
         return data.format(formatter);
     }
 
+    @Override
+    public String toString() {
+        return tipo + " de R$ " + valor + " em " + getDataFormatada();
+    }
 }
+
