@@ -1,0 +1,50 @@
+package com.mycompany.primerioprograma;
+import java.util.Scanner;
+
+public class BancoDados1 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        ContaBancaria conta = new ContaBancaria("Carlos Silva", 1000.00, 500.00);
+
+        while (true) {
+            System.out.println("\n=== Banco PSC ===");
+            System.out.println("Titular: " + conta.getTitular());
+            System.out.println("1 - Consultar Saldo");
+            System.out.println("2 - Consultar Limite");
+            System.out.println("3 - Consultar Total Disponivel");
+            System.out.println("4 - Sacar");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha uma opcao: ");
+            int opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.printf("Saldo atual: R$ %.2f\n", conta.getSaldo());
+                    break;
+                case 2:
+                    System.out.printf("Limite disponível: R$ %.2f\n", conta.getLimite());
+                    break;
+                case 3:
+                    System.out.printf("Total disponível (saldo + limite): R$ %.2f\n", conta.getSaldoTotalDisponivel());
+                    break;
+                case 4:
+                    System.out.print("Valor do saque: R$ ");
+                    double valor = scanner.nextDouble();
+                    if (conta.sacar(valor)) {
+                        System.out.println("Saque realizado com sucesso.");
+                    } else {
+                        System.out.println("Saldo insuficiente (mesmo com o limite).");
+                    }
+                    break;
+                case 0:
+                    System.out.println("Encerrando o sistema...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+        }
+    }
+}
