@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transacao {
+
     private String tipo;
     private double valor;
     private LocalDateTime data;
@@ -33,7 +34,7 @@ public class Transacao {
 
     @Override
     public String toString() {
-        return tipo + " de R$ " + valor + " em " + getDataFormatada();
+        return tipo + " em " + getDataFormatada();
     }
-}
 
+}
